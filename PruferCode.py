@@ -4,11 +4,11 @@ PruferCode function takes in any tree's adjacency matrix and returns its Prufer 
             Function limited to undirected graphs (two instances of every edge).
 
             Example Undirected Tree
-                 (2)
+                 (3)
                   |
-                 (6)  (3)
+                 (7)  (4)
                   |    |
-            (1)--(0)--(5)--(4)
+            (2)--(1)--(6)--(5)
 
             Corresponding Adjacency Matrix
             AM = np.matrix([[0,1,0,0,0,1,1],\
@@ -26,19 +26,19 @@ def PruferCode(array):
     A = []
     B = []
 
-    while np.sum(array) > 0:
-        column_sums = np.sum(array, 0)
+    while np.sum(array) > 2:                                    # stop with one pair left
+        column_sums = np.sum(array, 0)                          # column sum = # edges per node
         for i in range(n):
             if column_sums[0, i] == 1:						    # identifies leaf nodes
                 leaf = i                                        # trivial definition
-                adjacent = np.where(array[:, i] == 1)[0][0]     # identify 
-                A.append(leaf)                                  # A receives leaf node label
-                B.append(adjacent)	                            # B receives adjacent node
-                array[leaf, adjacent] = 0						# leaf node erased (both instances)
-                array[adjacent, leaf] = 0                       # leaf node erased (both instances)
+                parent = np.where(array[:, i] == 1)[0][0]       # identify parent node
+                B.append(leaf + 1)                              # A receives leaf   (+1 bc indexing)
+                A.append(parent + 1)	                        # B receives parent (+1 bc indexing)
+                array[leaf, parent] = 0						    # leaf node erased  (both instances)
+                array[parent, leaf] = 0                         # leaf node erased  (both instances)
                 break
 
-    Prufer = B[:-1]
+    Prufer = A
     return Prufer
 
 

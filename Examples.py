@@ -1,7 +1,8 @@
 import numpy as np
 from PruferCode import PruferCode
+from AMfromPrufer import AMfromPrufer
 
-t = np.matrix([[0,1,0,0,0,1,1],\
+M = np.matrix([[0,1,0,0,0,1,1],\
 			   [1,0,0,0,0,0,0],\
 			   [0,0,0,0,0,0,1],\
 			   [0,0,0,0,0,1,0],\
@@ -9,5 +10,10 @@ t = np.matrix([[0,1,0,0,0,1,1],\
 			   [1,0,0,1,1,0,0],\
 			   [1,0,1,0,0,0,0]])
 
-A = PruferCode(t)
-print(A)
+Prufer = PruferCode(M)
+
+AM = AMfromPrufer(Prufer)
+
+
+print(Prufer)
+print(AM)
