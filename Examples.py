@@ -17,3 +17,8 @@ AM = AMfromPrufer(Prufer)
 
 print(Prufer)
 print(AM)
+
+random.random()
+
+def EulerianCircuit(matrix):
+	t = 5
